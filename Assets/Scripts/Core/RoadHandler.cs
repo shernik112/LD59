@@ -82,9 +82,14 @@ public class RoadHandler : MonoBehaviour
 
     private void ClearEnemies(Transform segment)
     {
-        foreach (Transform child in segment)
+        for (int i = segment.childCount - 1; i >= 0; i--)
         {
-            Destroy(child.gameObject);
+            Transform child = segment.GetChild(i);
+            
+            if (child.CompareTag("Enemy"))
+            {
+                Destroy(child.gameObject);
+            }
         }
     }
 }

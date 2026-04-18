@@ -306,8 +306,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handlerSpeed: {fileID: 431759081}
-  handlerFlyingCars: {fileID: 0}
-  enemySpawner: {fileID: 0}
+  handlerFlyingCars: {fileID: 1320499658}
+  enemySpawner: {fileID: 904440739}
 --- !u!4 &332005193
 Transform:
   m_ObjectHideFlags: 0
@@ -520,7 +520,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8ab037bc8781848893a0243fbe0afc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefabs: []
+  enemyPrefabs:
+  - {fileID: 571727625909240035, guid: bcee24d2f6eaa4447b2bf94c3e8d7bc8, type: 3}
+  - {fileID: 6728494016550577385, guid: 307b02940107b6048b6eceb68fdaa851, type: 3}
   spawnChance: 0.5
   spawnOffset: {x: 0, y: 0.5, z: 0}
 --- !u!4 &904440740
@@ -741,6 +743,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 26.223, y: 0, z: 0}
+--- !u!1 &1272703870
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1272703872}
+  - component: {fileID: 1272703871}
+  m_Layer: 0
+  m_Name: CursorController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1272703871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272703870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8845a3f85e324898be594da4bef6b6d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockOnStart: 1
+--- !u!4 &1272703872
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272703870}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1320499657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,3 +1171,4 @@ SceneRoots:
   - {fileID: 431759082}
   - {fileID: 1320499659}
   - {fileID: 297619393}
+  - {fileID: 1272703872}

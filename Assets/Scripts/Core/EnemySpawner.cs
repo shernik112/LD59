@@ -12,13 +12,13 @@ public class EnemySpawner : OnBehaviour, IService
     {
         if (Random.value > spawnChance) return;
         if (enemyPrefabs == null || enemyPrefabs.Count == 0) return;
-
-        var prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
-
-        var enemy = Instantiate(prefab, segment.position + spawnOffset, Quaternion.identity);
+    
+        GameObject prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
         
+        GameObject enemy = Instantiate(prefab, segment.position + spawnOffset, Quaternion.identity);
+
         enemy.transform.SetParent(segment);
-        
+    
         enemy.transform.localPosition = new Vector3(0, spawnOffset.y, 0);
     }
 }
