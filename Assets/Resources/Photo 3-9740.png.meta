@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 54a35c4603b134c4490e5fe424b8b39a
+guid: e35bcbaf6d54f004880a2994e5e84b1a
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 50
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -129,12 +129,12 @@ TextureImporter:
       name: Photo 3-9740_0
       rect:
         serializedVersion: 2
-        x: 47
-        y: 43
-        width: 228
+        x: 0
+        y: 0
+        width: 227
         height: 264
       alignment: 9
-      pivot: {x: 0.5000001, y: 0.843441}
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: a36a8c3a4ee3b2f40ac70301b2c3c97d
+    spriteID: 330b06d62a459d44ba3ecc072822aa63
     internalID: 0
     vertices: []
     indices: 

@@ -82,7 +82,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.8, y: 4.34}
+  m_Size: {x: 1.38, y: 2.15}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -100,4 +100,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3458ccf23f4e2cd42b0cadd66a1a74de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 9bea05115c37ea64b935239ad0f0f13e, type: 2}
+  treeData:
+    type: 0
+    sprites:
+    - {fileID: -6007857137893288414, guid: ffcec3916d0771a42b099a87cc4fde93, type: 3}
+    scale: 4
+  rockData:
+    type: 1
+    sprites:
+    - {fileID: -4592956520300409358, guid: e35bcbaf6d54f004880a2994e5e84b1a, type: 3}
+    scale: 2
+  cutoutMaterial: {fileID: 2100000, guid: 7e2330c95e7a15b458211fbc7f84f332, type: 2}

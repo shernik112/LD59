@@ -1,32 +1,58 @@
 using UnityEngine;
 
+using UnityEngine;
+
 public class TreePrefab : OnBehaviour
 {
-    [SerializeField] private TreeData data;
-
-    private Transform spriteA;
-    private Transform spriteB;
+    [SerializeField] private PropData treeData;
+    [SerializeField] private PropData rockData;
+    [SerializeField] private Material cutoutMaterial;
 
     protected override void OnInitialize()
     {
+        // ✔ случай: 0 = дерево, 1 = камень
+        bool isRock = Random.value < 0.5f;
+
+        var data = isRock ? rockData : treeData;
+
         var randomIndex = Random.Range(0, data.sprites.Length);
         var sprite = data.sprites[randomIndex];
 
-        spriteA = CreateSprite("A", sprite, 0f);
-        spriteB = CreateSprite("B", sprite, 90f);
+        CreateQuad("A", sprite, data.scale, 0f, -0.01f);
+        CreateQuad("B", sprite, data.scale, 90f, 0.01f);
     }
 
-    private Transform CreateSprite(string name, Sprite sprite, float yRotation)
+    private void CreateQuad(string name, Sprite sprite, float scale, float yRotation, float offsetZ)
     {
-        var go = new GameObject(name);
-        go.transform.SetParent(transform);
-        go.transform.localPosition = Vector3.zero;
-        
-        go.transform.localRotation = Quaternion.Euler(0, yRotation, 0);
+        var quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
+        quad.name = name;
 
-        var sr = go.AddComponent<SpriteRenderer>();
-        sr.sprite = sprite;
+        quad.transform.SetParent(transform);
+        quad.transform.localRotation = Quaternion.Euler(0f, yRotation, 0f);
+        quad.transform.localScale = Vector3.one * scale;
 
-        return go.transform;
+        var renderer = quad.GetComponent<MeshRenderer>();
+
+        var matInstance = new Material(cutoutMaterial);
+        renderer.material = matInstance;
+        matInstance.mainTexture = sprite.texture;
+
+        // ✔ правильное выравнивание по земле
+        quad.transform.localPosition = new Vector3(0f, scale * 0.5f, offsetZ);
     }
 }
+    
+    [System.Serializable]
+    public class PropData
+    {
+        public PropType type;
+        public Sprite[] sprites;
+        public float scale = 1f;
+    }
+    
+    
+    public enum PropType
+    {
+        Tree,
+        Rock
+    }
