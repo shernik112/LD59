@@ -8,7 +8,6 @@ public class RoadHandler : MonoBehaviour
 
     [Header("Setup")]
     [SerializeField] private int segmentCount = 10;
-    [SerializeField] private float speed = 5f;
         
     [SerializeField] private int lengthMultiplier = 2;
 
@@ -29,7 +28,6 @@ public class RoadHandler : MonoBehaviour
 
     private void Init()
     {
-        // Plane по умолчанию 10 units по Z в Unity
         segmentLength = 10f * lengthMultiplier;
 
         var startPos = transform.position;
@@ -44,7 +42,8 @@ public class RoadHandler : MonoBehaviour
 
     private void Move()
     {
-        Vector3 delta = Vector3.back * speed * Time.deltaTime;
+        var handlerSpeed = ServiceLocator.Instance.Get<HandlerSpeed>();
+        var delta = Vector3.back * handlerSpeed.CurrentSpeed * Time.deltaTime;
 
         for (int i = 0; i < segments.Count; i++)
         {

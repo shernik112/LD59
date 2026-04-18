@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class EntryPointPlayScene : MonoBehaviour
+public class EntryPointPlayScene : OnBehaviour
 {
+    [SerializeField] private HandlerSpeed handlerSpeed = default;
     private void Awake()
     {
-        var locator = new ServiceLocator();
+        ServiceLocator.Instance.Register<HandlerSpeed>(handlerSpeed);
     }
 }
