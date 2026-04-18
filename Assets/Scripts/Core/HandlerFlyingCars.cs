@@ -11,6 +11,9 @@ public class HandlerFlyingCars : OnBehaviour, IService
     [SerializeField] private float explosionForce = 1500f;
     [SerializeField] private float upwardModifier = 3f;
 
+    [Header("Truck Settings")]
+    [SerializeField] private float truckJumpForce = 5f;
+
     private List<GameObject> _cars = new List<GameObject>();
 
     public void RegisterCar(GameObject car)
@@ -41,18 +44,19 @@ public class HandlerFlyingCars : OnBehaviour, IService
             if (player != null) playerTransform = player.transform;
         }
 
-        Vector3 origin = playerTransform != null ? playerTransform.position : transform.position;
+        if (playerTransform == null) return;
+
+        Vector3 origin = playerTransform.position;
 
         foreach (var car in _cars)
         {
             if (car == null) continue;
 
             float distance = Vector3.Distance(origin, car.transform.position);
-
-            // 2. Проверяем, попадает ли машина в радиус именно сейчас
+            
             if (distance <= explosionRadius)
             {
-                car.transform.SetParent(null);
+                // car.transform.SetParent(null); // УДАЛЕНО: теперь не отцепляем
 
                 Rigidbody rb = car.GetComponent<Rigidbody>();
                 if (rb == null) rb = car.AddComponent<Rigidbody>();
@@ -60,7 +64,15 @@ public class HandlerFlyingCars : OnBehaviour, IService
                 rb.isKinematic = false;
                 rb.mass = 1f;
 
-                rb.AddExplosionForce(explosionForce, origin, explosionRadius, upwardModifier, ForceMode.Impulse);
+                if (car.CompareTag("Truck"))
+                {
+                    rb.AddForce(Vector3.up * truckJumpForce, ForceMode.Impulse);
+                }
+                else
+                {
+                    rb.AddExplosionForce(explosionForce, origin, explosionRadius, upwardModifier, ForceMode.Impulse);
+                }
+
                 rb.AddTorque(Random.insideUnitSphere * explosionForce, ForceMode.Impulse);
             }
         }
