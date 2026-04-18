@@ -4,11 +4,11 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     [Header("Movement")]
-    public float forwardSpeed = 12f;
     public float acceleration = 25f;
     public float returnToCenterSpeed;
     public float maxSteerAngle = 35f;
-
+    public float strafeSpeed = 5f;
+    
     [Header("Steering")]
     public float steerSpeed = 240f;
 

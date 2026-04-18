@@ -4,9 +4,6 @@ using UnityEngine;
 public class PlayerMover : OnBehaviour
 {
     [SerializeField] private PlayerData playerData;
-    [SerializeField] private float maxSteerAngle = 35f;
-    [SerializeField] private float steerSpeed = 240f;
-    [SerializeField] private float returnToCenterSpeed = 90f;
 
     private Rigidbody _rb;
     private float _steerInput;
@@ -31,11 +28,11 @@ public class PlayerMover : OnBehaviour
 
     protected override void OnFixedUpdate()
     {
-        float targetSteerAngle = _steerInput * maxSteerAngle;
+        var targetSteerAngle = _steerInput * playerData.maxSteerAngle;
 
-        float speed = Mathf.Abs(_steerInput) > 0.01f
-            ? steerSpeed
-            : returnToCenterSpeed;
+        var speed = Mathf.Abs(_steerInput) > 0.01f
+            ? playerData.steerSpeed
+            : playerData.returnToCenterSpeed;
 
         _currentSteerAngle = Mathf.MoveTowards(
             _currentSteerAngle,
@@ -43,21 +40,20 @@ public class PlayerMover : OnBehaviour
             speed * Time.fixedDeltaTime
         );
 
-        Quaternion targetRotation = Quaternion.Euler(0f, _baseYaw + _currentSteerAngle, 0f);
+        var targetRotation = Quaternion.Euler(0f, _baseYaw + _currentSteerAngle, 0f);
         _rb.MoveRotation(targetRotation);
 
-        Vector3 desiredVelocity = Vector3.zero;
+        var velocity = _rb.linearVelocity;
+        
+        var targetX = _steerInput * playerData.strafeSpeed;
 
-        if (Mathf.Abs(_steerInput) > 0.01f)
-        {
-            desiredVelocity = transform.forward * playerData.forwardSpeed;
-        }
-
-        desiredVelocity.y = _rb.linearVelocity.y;
-
-        Vector3 velocity = _rb.linearVelocity;
-        velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, playerData.acceleration * Time.fixedDeltaTime);
-        velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, playerData.acceleration * Time.fixedDeltaTime);
+        velocity.x = Mathf.MoveTowards(
+            velocity.x,
+            targetX,
+            playerData.acceleration * Time.fixedDeltaTime
+        );
+        
+        velocity.z = 0f;
         _rb.linearVelocity = velocity;
     }
 }
