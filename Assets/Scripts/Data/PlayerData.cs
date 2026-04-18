@@ -8,6 +8,7 @@ public class PlayerData : ScriptableObject
     public float returnToCenterSpeed;
     public float maxSteerAngle = 35f;
     public float strafeSpeed = 5f;
+    public float rotationSmoothTime = 0.15f;
     
     [Header("Steering")]
     public float steerSpeed = 240f;
