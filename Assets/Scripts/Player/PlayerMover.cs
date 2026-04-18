@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerMover : OnBehaviour
+public class PlayerMover : OnBehaviour, IService
 {
     [SerializeField] private PlayerData playerData;
     [SerializeField] private float maxSteerAngle = 35f;

@@ -165,7 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   segmentPrefab: {fileID: 4807251088347608049, guid: e1d8e7c789c286d44b04c72218931f75, type: 3}
   segmentCount: 10
-  lengthMultiplier: 1
+  lengthMultiplier: 2
 --- !u!1 &129792225
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,6 +308,7 @@ MonoBehaviour:
   handlerSpeed: {fileID: 431759081}
   handlerFlyingCars: {fileID: 1320499658}
   enemySpawner: {fileID: 904440739}
+  playerMover: {fileID: 1321183281}
 --- !u!4 &332005193
 Transform:
   m_ObjectHideFlags: 0

@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 15b2eeab461797944872128ac43198f9
+guid: 54a35c4603b134c4490e5fe424b8b39a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8667466294985060184
-    second: tree_0
-  - first:
-      213: 5281997702118322174
-    second: tree_1
+      213: -4592956520300409358
+    second: Photo 3-9740_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -31,7 +28,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMipmapLimit: 1
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -54,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 50
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -129,45 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tree_0
+      name: Photo 3-9740_0
       rect:
         serializedVersion: 2
-        x: 28
+        x: 47
         y: 43
-        width: 138
-        height: 215
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 228
+        height: 264
+      alignment: 9
+      pivot: {x: 0.5000001, y: 0.843441}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 7c2c57faf88c347478b689d8ab49f58e
-      internalID: -94909027
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tree_1
-      rect:
-        serializedVersion: 2
-        x: 195
-        y: 41
-        width: 138
-        height: 215
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d9d6fd339c5482142b252acf48dd0733
-      internalID: 1545649374
+      spriteID: 2fd0eaa116a8240c0800000000000000
+      internalID: -4592956520300409358
       vertices: []
       indices: 
       edges: []
@@ -176,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: a36a8c3a4ee3b2f40ac70301b2c3c97d
     internalID: 0
     vertices: []
     indices: 
@@ -186,8 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Tree_0: -94909027
-      Tree_1: 1545649374
+      Photo 3-9740_0: -4592956520300409358
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

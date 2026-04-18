@@ -3,23 +3,30 @@ using UnityEngine;
 public class TreePrefab : OnBehaviour
 {
     [SerializeField] private TreeData data;
-    
+
+    private Transform spriteA;
+    private Transform spriteB;
+
     protected override void OnInitialize()
     {
-        var spriteRenderer = GetComponent<SpriteRenderer>();
         var randomIndex = Random.Range(0, data.sprites.Length);
-        spriteRenderer.sprite = data.sprites[randomIndex];
+        var sprite = data.sprites[randomIndex];
+
+        spriteA = CreateSprite("A", sprite, 0f);
+        spriteB = CreateSprite("B", sprite, 90f);
     }
 
-    protected override void OnUpdate()
+    private Transform CreateSprite(string name, Sprite sprite, float yRotation)
     {
-        if (data.target != null)
-        {
-            var direction = data.target.position - transform.position;
-            
-            var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            
-            transform.rotation = Quaternion.Euler(0, 0, angle);
-        }
+        var go = new GameObject(name);
+        go.transform.SetParent(transform);
+        go.transform.localPosition = Vector3.zero;
+        
+        go.transform.localRotation = Quaternion.Euler(0, yRotation, 0);
+
+        var sr = go.AddComponent<SpriteRenderer>();
+        sr.sprite = sprite;
+
+        return go.transform;
     }
 }

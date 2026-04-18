@@ -4,5 +4,4 @@ using UnityEngine;
 public class TreeData : ScriptableObject
 {
     public Sprite[] sprites;
-    public Transform target;
 }
