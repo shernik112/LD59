@@ -51,7 +51,7 @@ public class RoadHandler : MonoBehaviour
         var speedHandler = ServiceLocator.Instance.Get<HandlerSpeed>();
         if (speedHandler == null) return;
 
-        var delta = Vector3.back * speedHandler.CurrentSpeed * Time.deltaTime;
+        var delta = Vector3.back * (speedHandler.CurrentSpeed - 50) * Time.deltaTime;
 
         for (int i = 0; i < segments.Count; i++)
         {

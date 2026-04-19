@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3458ccf23f4e2cd42b0cadd66a1a74de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shadowSprite: {fileID: 4093480436322176185, guid: 4f73deaa78adcb945832bb0ee5f18f81, type: 3}
   treeData:
     type: 0
     sprites:

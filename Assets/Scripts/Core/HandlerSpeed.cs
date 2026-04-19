@@ -3,9 +3,9 @@ using UnityEngine;
 public class HandlerSpeed : OnBehaviour, IService
 {
     [Header("Settings")]
-    [SerializeField] private float initialSpeed = 5f;      
-    [SerializeField] private float maxSpeed = 25f;        
-    [SerializeField] private float acceleration = 0.05f;    
+    [SerializeField] private float initialSpeed = 60f;      
+    [SerializeField] private float maxSpeed = 140f;        
+    [SerializeField] private float acceleration = 0.1f;    
 
     public float CurrentSpeed { get; private set; }
 

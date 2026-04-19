@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class TreePrefab : OnBehaviour
 {
+    [SerializeField] private Sprite shadowSprite;
     [SerializeField] private PropData treeData;
     [SerializeField] private PropData rockData;
     [SerializeField] private Material cutoutMaterial;
 
     protected override void OnInitialize()
     {
-        // ✔ случай: 0 = дерево, 1 = камень
         bool isRock = Random.value < 0.5f;
 
         var data = isRock ? rockData : treeData;
@@ -20,6 +20,7 @@ public class TreePrefab : OnBehaviour
 
         CreateQuad("A", sprite, data.scale, 0f, -0.01f);
         CreateQuad("B", sprite, data.scale, 90f, 0.01f);
+        CreateShadow(shadowSprite, data.scale);
     }
 
     private void CreateQuad(string name, Sprite sprite, float scale, float yRotation, float offsetZ)
@@ -39,6 +40,30 @@ public class TreePrefab : OnBehaviour
 
         // ✔ правильное выравнивание по земле
         quad.transform.localPosition = new Vector3(0f, scale * 0.5f, offsetZ);
+    }
+    
+    private void CreateShadow(Sprite sprite, float scale)
+    {
+        var shadow = GameObject.CreatePrimitive(PrimitiveType.Quad);
+        shadow.name = "Shadow";
+
+        shadow.transform.SetParent(transform);
+
+        // ✔ позиция — на земле
+        shadow.transform.localPosition = new Vector3(0.04f, -0.077f, -0.181f);
+
+        // ✔ твой поворот
+        shadow.transform.localRotation = Quaternion.Euler(120f, -47f, -42f);
+
+        // ✔ немного больше, чем объект
+        shadow.transform.localScale = Vector3.one * 1.8f;
+
+        var renderer = shadow.GetComponent<MeshRenderer>();
+
+        var matInstance = new Material(cutoutMaterial);
+        renderer.material = matInstance;
+
+        matInstance.mainTexture = sprite.texture;
     }
 }
     
