@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: cc128de166dbbd84b8805a0eff10fcd7
+guid: 14ca9fe137c12664380c29aedf435eca
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7421438677693804467
-    second: Car1_0
+      213: -5643105228771564274
+    second: Sprite-0003_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Car1_0
+      name: Sprite-0003_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3bfa84a282f3ef660800000000000000
-      internalID: 7421438677693804467
+      spriteID: e05ebe061b9afa1b0800000000000000
+      internalID: -5643105228771564274
       vertices: []
       indices: 
       edges: []
