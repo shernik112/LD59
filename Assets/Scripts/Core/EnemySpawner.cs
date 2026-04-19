@@ -40,8 +40,7 @@ public class EnemySpawner : OnBehaviour, IService
             _previousSegmentWasEmpty = false;
             return;
         }
-
-        // Если прошлый сегмент был пустой, этот сегмент обязан быть не пустым
+        
         if (!_previousSegmentWasEmpty && Random.value > spawnChance)
         {
             _previousSegmentWasEmpty = true;
@@ -50,9 +49,7 @@ public class EnemySpawner : OnBehaviour, IService
 
         GameObject prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
         string currentTruckType = GetTruckType(prefab);
-
-        // Если предыдущий сегмент был НЕ пустой и тип трака сменился,
-        // то текущий сегмент оставляем пустым, а этот prefab спавним на следующем
+        
         if (!_previousSegmentWasEmpty &&
             !string.IsNullOrEmpty(_lastSpawnedTruckType) &&
             !string.IsNullOrEmpty(currentTruckType) &&

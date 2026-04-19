@@ -433,6 +433,8 @@ MonoBehaviour:
   musicSource: {fileID: 126688106}
   sfxSource: {fileID: 126688106}
   mainTrack: {fileID: 8300000, guid: b6b62755c2a63f241b147fdd1759c532, type: 3}
+  maxPitch: 1.4
+  pitchIncreasePerSecond: 0.0075
 --- !u!4 &126688108
 Transform:
   m_ObjectHideFlags: 0
@@ -1672,7 +1674,8 @@ MonoBehaviour:
   speedRampUp: 0.5
   baseSpeedIncrease: 0.02
   maxSpeedMultiplier: 2.5
-  directionSnapFactor: 0.6
+  leftBound: -6
+  rightBound: 6
 --- !u!65 &1321183282
 BoxCollider:
   m_ObjectHideFlags: 0

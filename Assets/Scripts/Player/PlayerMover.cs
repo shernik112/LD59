@@ -6,23 +6,28 @@ public class PlayerMover : OnBehaviour, IService
 {
     public event Action OnDestroyCar;
 
+    [Header("Audio")]
     [SerializeField] private AudioClip crashSfx;
+
+    [Header("Settings")]
     [SerializeField] private PlayerData playerData;
     [SerializeField] private float maxSteerAngle = 35f;
     [SerializeField] private float steerSpeed = 240f;
     [SerializeField] private float returnToCenterSpeed = 150f;
 
+    [Header("Speed")]
     [SerializeField] private float speedRampUp = 0.5f;
     [SerializeField] private float baseSpeedIncrease = 0.02f;
     [SerializeField] private float maxSpeedMultiplier = 2.5f;
 
-    [SerializeField] private float directionSnapFactor = 0.6f;
+    [Header("World Bounds")]
+    [SerializeField] private float leftBound = -6f;
+    [SerializeField] private float rightBound = 6f;
 
     private Rigidbody _rb;
 
     private float _steerInput;
     private float _lastInput;
-    private float _prevInput;
 
     private float _currentSteerAngle;
     private float _baseYaw;
@@ -35,10 +40,8 @@ public class PlayerMover : OnBehaviour, IService
         _rb = GetComponent<Rigidbody>();
         _baseYaw = _rb.rotation.eulerAngles.y;
 
-        if (playerData.freezeTilt)
-        {
-            _rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-        }
+        _rb.constraints = RigidbodyConstraints.FreezeRotationX |
+                          RigidbodyConstraints.FreezeRotationZ;
     }
 
     protected override void OnUpdate()
@@ -51,7 +54,7 @@ public class PlayerMover : OnBehaviour, IService
 
         if (Input.GetKeyDown(KeyCode.D))
             _lastInput = 1f;
-        
+
         if (!left && !right)
             _steerInput = 0f;
         else
@@ -62,20 +65,19 @@ public class PlayerMover : OnBehaviour, IService
 
     protected override void OnFixedUpdate()
     {
-        _rb.position = new Vector3(_rb.position.x, 0.5f, 0f);
+        HandleSpeed();
+        HandleRotation();
+        HandleMovement();
+    }
 
+    private void HandleSpeed()
+    {
         if (Mathf.Abs(_steerInput) > 0.01f)
             _speedMultiplier += speedRampUp * Time.fixedDeltaTime;
         else
             _speedMultiplier = Mathf.Lerp(_speedMultiplier, 1f, 3f * Time.fixedDeltaTime);
 
         _speedMultiplier = Mathf.Clamp(_speedMultiplier, 1f, maxSpeedMultiplier);
-
-        HandleRotation();
-        HandleMovement();
-        ClampPosition();
-
-        _prevInput = _steerInput;
     }
 
     private void HandleRotation()
@@ -89,7 +91,9 @@ public class PlayerMover : OnBehaviour, IService
             speed * Time.fixedDeltaTime
         );
 
-        Quaternion targetRotation = Quaternion.Euler(0f, _baseYaw + _currentSteerAngle, 0f);
+        Quaternion targetRotation =
+            Quaternion.Euler(0f, _baseYaw + _currentSteerAngle, 0f);
+
         _rb.MoveRotation(targetRotation);
     }
 
@@ -103,19 +107,20 @@ public class PlayerMover : OnBehaviour, IService
         float accel = playerData.acceleration * Time.fixedDeltaTime;
 
         velocity.x = Mathf.MoveTowards(velocity.x, targetX, accel);
-
-        if (Mathf.Abs(_steerInput) < 0.01f)
-            velocity.x = Mathf.MoveTowards(velocity.x, 0f, accel);
-
         velocity.z = 0f;
+
         _rb.linearVelocity = velocity;
+
+        ClampPositionSmooth();
     }
 
-    private void ClampPosition()
+    private void ClampPositionSmooth()
     {
         Vector3 pos = _rb.position;
-        pos.x = Mathf.Clamp(pos.x, -3f, 3f);
-        _rb.MovePosition(pos);
+        
+        pos.x = Mathf.Clamp(pos.x, leftBound, rightBound);
+
+        _rb.position = pos;
     }
 
     private void OnCollisionEnter(Collision other)
@@ -125,9 +130,7 @@ public class PlayerMover : OnBehaviour, IService
             OnDestroyCar?.Invoke();
 
             if (AudioService.Instance != null && crashSfx != null)
-            {
                 AudioService.Instance.PlaySFX(crashSfx);
-            }
         }
     }
 }

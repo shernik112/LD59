@@ -11,9 +11,14 @@ public class AudioService : OnBehaviour, IService
     [Header("Clips")]
     [SerializeField] private AudioClip mainTrack;
 
+    [Header("Music Speed Settings")]
+    [SerializeField] private float maxPitch = 1.4f;
+    [SerializeField] private float pitchIncreasePerSecond = 0.01f;
+
+    private float _currentPitch = 1f;
+
     protected override void OnInitialize()
     {
-        // ЖЁСТКИЙ singleton
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -27,12 +32,31 @@ public class AudioService : OnBehaviour, IService
         {
             musicSource.clip = mainTrack;
             musicSource.loop = true;
+            musicSource.pitch = 1f;
         }
+
+        _currentPitch = 1f;
     }
 
     private void Start()
     {
         PlayMusic();
+    }
+
+    protected override void OnUpdate()
+    {
+        UpdateMusicSpeed();
+    }
+
+    private void UpdateMusicSpeed()
+    {
+        if (musicSource == null || !musicSource.isPlaying)
+            return;
+
+        _currentPitch += pitchIncreasePerSecond * Time.deltaTime;
+        _currentPitch = Mathf.Clamp(_currentPitch, 1f, maxPitch);
+
+        musicSource.pitch = _currentPitch;
     }
 
     private void PlayMusic()
@@ -42,12 +66,14 @@ public class AudioService : OnBehaviour, IService
 
         musicSource.clip = mainTrack;
         musicSource.loop = true;
+        musicSource.pitch = 1f;
         musicSource.Play();
     }
 
     public void StopMusic()
     {
         if (musicSource == null) return;
+
         musicSource.Stop();
     }
 

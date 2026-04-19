@@ -55,7 +55,8 @@ public class HandlerFlyingCars : OnBehaviour, IService
             return;
 
         Vector3 origin = playerTransform.position;
-        bool launchedAnyCar = false;
+
+        bool affectedAnyCar = false;
 
         foreach (var car in _cars)
         {
@@ -84,12 +85,18 @@ public class HandlerFlyingCars : OnBehaviour, IService
             }
 
             rb.AddTorque(Random.insideUnitSphere * explosionForce, ForceMode.Impulse);
-            launchedAnyCar = true;
+
+            affectedAnyCar = true;
         }
 
-        if (launchedAnyCar && launchSfx != null)
+
+        if (launchSfx != null)
         {
             AudioService.Instance?.PlaySFX(launchSfx);
         }
+        
+        Debug.Log(affectedAnyCar
+            ? "Ability used with cars"
+            : "Ability used with no targets");
     }
 }
