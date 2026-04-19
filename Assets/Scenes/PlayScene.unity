@@ -668,7 +668,6 @@ MonoBehaviour:
   playerMover: {fileID: 1321183281}
   uiManager: {fileID: 2066510972}
   pauseHandler: {fileID: 2141106348}
-  audioService: {fileID: 126688107}
 --- !u!4 &332005193
 Transform:
   m_ObjectHideFlags: 0
@@ -821,7 +820,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -1289,6 +1288,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a840368510a4f943871f9e2c4aabc14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1061734250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1061734252}
+  - component: {fileID: 1061734251}
+  m_Layer: 0
+  m_Name: SpeedRecord
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1061734251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061734250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3c01622aa13dfc4e8c0c7ff12e6f9ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <BestSpeed>k__BackingField: 0
+--- !u!4 &1061734252
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061734250}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.3820074, y: -2.6296957, z: 18.12633}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1089047355
 GameObject:
   m_ObjectHideFlags: 0
@@ -1571,6 +1615,7 @@ MonoBehaviour:
   explosionForce: 100
   upwardModifier: 2.5
   truckJumpForce: 0.1
+  launchSfx: {fileID: 8300000, guid: a76b5d97de073f54eb1543354de7ec12, type: 3}
 --- !u!4 &1320499659
 Transform:
   m_ObjectHideFlags: 0
@@ -1619,6 +1664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b5cdd1ecea8734d89031b438a73e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crashSfx: {fileID: 8300000, guid: a75c1e10c1e158445ab1aaa66f871651, type: 3}
   playerData: {fileID: 11400000, guid: 7fb63dedefb6c9a48b70efec23b5b2e1, type: 2}
   maxSteerAngle: 35
   steerSpeed: 550
@@ -2456,6 +2502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fdbeb36c1cd07543a4145fcad9f11a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _autoUnpauseDelay: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2481,3 +2528,4 @@ SceneRoots:
   - {fileID: 2050456466}
   - {fileID: 120270345}
   - {fileID: 126688108}
+  - {fileID: 1061734252}

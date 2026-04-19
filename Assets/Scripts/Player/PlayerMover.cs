@@ -6,6 +6,7 @@ public class PlayerMover : OnBehaviour, IService
 {
     public event Action OnDestroyCar;
 
+    [SerializeField] private AudioClip crashSfx;
     [SerializeField] private PlayerData playerData;
     [SerializeField] private float maxSteerAngle = 35f;
     [SerializeField] private float steerSpeed = 240f;
@@ -15,7 +16,7 @@ public class PlayerMover : OnBehaviour, IService
     [SerializeField] private float baseSpeedIncrease = 0.02f;
     [SerializeField] private float maxSpeedMultiplier = 2.5f;
 
-    [SerializeField] private float directionSnapFactor = 0.6f; // смягчение резкой смены
+    [SerializeField] private float directionSnapFactor = 0.6f;
 
     private Rigidbody _rb;
 
@@ -50,8 +51,7 @@ public class PlayerMover : OnBehaviour, IService
 
         if (Input.GetKeyDown(KeyCode.D))
             _lastInput = 1f;
-
-        // если ничего не нажато → стоп
+        
         if (!left && !right)
             _steerInput = 0f;
         else
@@ -121,6 +121,13 @@ public class PlayerMover : OnBehaviour, IService
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.TryGetComponent<FlyingCar>(out _))
+        {
             OnDestroyCar?.Invoke();
+
+            if (AudioService.Instance != null && crashSfx != null)
+            {
+                AudioService.Instance.PlaySFX(crashSfx);
+            }
+        }
     }
 }

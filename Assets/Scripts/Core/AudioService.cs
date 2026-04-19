@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AudioService : OnBehaviour, IService
 {
-    private static AudioService instance;
+    public static AudioService Instance { get; private set; }
 
     [Header("Sources")]
     [SerializeField] private AudioSource musicSource;
@@ -13,13 +13,14 @@ public class AudioService : OnBehaviour, IService
 
     protected override void OnInitialize()
     {
-        if (instance != null)
+        // ЖЁСТКИЙ singleton
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
 
-        instance = this;
+        Instance = this;
         DontDestroyOnLoad(gameObject);
 
         if (musicSource != null)
@@ -53,6 +54,7 @@ public class AudioService : OnBehaviour, IService
     public void PlaySFX(AudioClip sfx)
     {
         if (sfxSource == null || sfx == null) return;
+
         sfxSource.PlayOneShot(sfx, 1f);
     }
 }

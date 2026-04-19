@@ -5,23 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class PauseHandler : OnBehaviour, IService
 {
-    private float _autoUnpauseDelay = 2f;
+    [SerializeField] private float _autoUnpauseDelay = 1f;
+
     public event Action<bool> OnPause;
-    
+
     protected override bool UpdateWhenPaused => true;
 
     private Coroutine _autoUnpauseRoutine;
     private PlayerMover _playerMover;
-    
+    private HandlerSpeed _handlerSpeed;
+
     protected override void OnInitialize()
     {
         _playerMover = ServiceLocator.Instance.Get<PlayerMover>();
+        _handlerSpeed = ServiceLocator.Instance.Get<HandlerSpeed>();
+
         _playerMover.OnDestroyCar += TogglePause;
     }
 
     private void OnDestroy()
     {
-        _playerMover.OnDestroyCar -= TogglePause;
+        if (_playerMover != null)
+            _playerMover.OnDestroyCar -= TogglePause;
     }
 
     protected override void OnUpdate()
@@ -35,27 +40,24 @@ public class PauseHandler : OnBehaviour, IService
     private void TogglePause()
     {
         if (PauseAll.True)
-        {
             Unpause();
-        }
         else
-        {
             Pause();
-        }
     }
 
     private void Pause()
     {
+        if (PauseAll.True) return;
+        
         PauseAll.Add(this);
         Time.timeScale = 0f;
 
-        if (_autoUnpauseRoutine != null)
-            StopCoroutine(_autoUnpauseRoutine);
-
+        if (_autoUnpauseRoutine != null) StopCoroutine(_autoUnpauseRoutine);
         _autoUnpauseRoutine = StartCoroutine(AutoUnpause());
+
         OnPause?.Invoke(true);
     }
-
+    
     private void Unpause()
     {
         if (_autoUnpauseRoutine != null)
@@ -73,11 +75,6 @@ public class PauseHandler : OnBehaviour, IService
     {
         yield return new WaitForSecondsRealtime(_autoUnpauseDelay);
         Unpause();
-        RestartScene();
-    }
-    
-    private void RestartScene()
-    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
