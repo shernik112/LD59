@@ -100,29 +100,12 @@ public class PlayerMover : OnBehaviour, IService
         float boostedSpeed = playerData.strafeSpeed * (1f + _baseSpeedBoost);
         float targetX = _steerInput * boostedSpeed * _speedMultiplier;
 
-        bool directionChanged =
-            Mathf.Sign(_steerInput) != Mathf.Sign(_prevInput) &&
-            Mathf.Abs(_steerInput) > 0.01f;
+        float accel = playerData.acceleration * Time.fixedDeltaTime;
 
-        if (directionChanged)
-        {
-            // не мгновенно, а с ослаблением
-            velocity.x = Mathf.Lerp(velocity.x, targetX, directionSnapFactor);
-        }
-        else
-        {
-            velocity.x = Mathf.MoveTowards(
-                velocity.x,
-                targetX,
-                playerData.acceleration * Time.fixedDeltaTime
-            );
-        }
+        velocity.x = Mathf.MoveTowards(velocity.x, targetX, accel);
 
-        // плавная остановка
         if (Mathf.Abs(_steerInput) < 0.01f)
-        {
-            velocity.x = Mathf.Lerp(velocity.x, 0f, 5f * Time.fixedDeltaTime);
-        }
+            velocity.x = Mathf.MoveTowards(velocity.x, 0f, accel);
 
         velocity.z = 0f;
         _rb.linearVelocity = velocity;

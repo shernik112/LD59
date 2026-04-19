@@ -716,6 +716,8 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 6728494016550577385, guid: 7f3a6d2a4bcb5c443ae7bfe159ab80ec, type: 3}
   - {fileID: 6728494016550577385, guid: 307b02940107b6048b6eceb68fdaa851, type: 3}
+  - {fileID: 6728494016550577385, guid: b9109e36b0710274c96e75ead2ff16d4, type: 3}
+  - {fileID: 6728494016550577385, guid: 16e6a2739f3d9c14e815964f65b391cd, type: 3}
   - {fileID: 6728494016550577385, guid: f32b3bec70ec13c4bb63b947ff6f6fb2, type: 3}
   spawnChance: 0.5
   spawnOffset: {x: 0, y: 0.5, z: 0}
