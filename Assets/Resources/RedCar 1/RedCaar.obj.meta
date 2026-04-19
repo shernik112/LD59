@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 04c0f7f051da33646be5251c8cdad159
+guid: 6d9464a20a5d2bd438c0372a4bde5d56
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: RedCaar.mtl
-    second: {fileID: 2100000, guid: a55b562f57b379e42b11333b0477e8b2, type: 2}
+    second: {fileID: 2100000, guid: 4630492137262164ca9df36d890f1838, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

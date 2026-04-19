@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: eff6bd41efece8c4d81dff82037df1cf
+guid: c64996442bf35c84fa9293a5ffa47866
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7421438677693804467
-    second: Car1_0
+      213: -8994060957790782174
+    second: RedCaar_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Car1_0
+      name: RedCaar_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3bfa84a282f3ef660800000000000000
-      internalID: 7421438677693804467
+      spriteID: 22dbba2263dae2380800000000000000
+      internalID: -8994060957790782174
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Car1_0: 7421438677693804467
+      RedCaar_0: -8994060957790782174
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

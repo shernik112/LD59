@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e6dca9d36e43a9340a23f4389e871510
+guid: e8e37016cfd638841a0affaa9cdb6430
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7145198348311737387
-    second: Sprite-0002_0
+      213: -6461785809725244843
+    second: Truck_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sprite-0002_0
+      name: Truck_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b2434d87a08d82360800000000000000
-      internalID: 7145198348311737387
+      spriteID: 55abaa4ca002356a0800000000000000
+      internalID: -6461785809725244843
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Sprite-0002_0: 7145198348311737387
+      Truck_0: -6461785809725244843
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
