@@ -64,7 +64,7 @@ public class HandlerFlyingCars : OnBehaviour, IService
                 rb.isKinematic = false;
                 rb.mass = 1f;
 
-                if (car.CompareTag("Truck"))
+                if (car.CompareTag("Truck") || car.CompareTag("Truck2"))
                 {
                     rb.AddForce(Vector3.up * truckJumpForce, ForceMode.Impulse);
                 }

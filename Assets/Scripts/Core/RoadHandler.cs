@@ -6,7 +6,8 @@ public class RoadHandler : MonoBehaviour
     [Header("Prefab (Plane)")]
     [SerializeField] private GameObject segmentPrefab;
 
-    [Header("Setup")]
+    [Header("Setup")] 
+    private int _startEmptySegments = 2;
     [SerializeField] private int segmentCount = 10;
     [SerializeField] private int lengthMultiplier = 2;
 
@@ -30,15 +31,15 @@ public class RoadHandler : MonoBehaviour
         segmentLength = 10f * lengthMultiplier;
         var startPos = transform.position;
 
+        _enemySpawner = ServiceLocator.Instance.Get<EnemySpawner>();
+
         for (int i = 0; i < segmentCount; i++)
         {
             var pos = startPos + Vector3.forward * segmentLength * i;
             var obj = Instantiate(segmentPrefab, pos, Quaternion.identity, transform);
             segments.Add(obj.transform);
-
-            _enemySpawner = ServiceLocator.Instance.Get<EnemySpawner>();
-     
-            if (i > 1 && _enemySpawner != null)
+            
+            if (_enemySpawner != null && i >= _startEmptySegments)
             {
                 _enemySpawner.SpawnEnemyOnSegment(obj.transform);
             }

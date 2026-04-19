@@ -5,7 +5,7 @@ public class HandlerSpeed : OnBehaviour, IService
     [Header("Settings")]
     [SerializeField] private float initialSpeed = 60f;      
     [SerializeField] private float maxSpeed = 140f;        
-    [SerializeField] private float acceleration = 0.1f;    
+    [SerializeField] private float acceleration = 0.06f;    
 
     public float CurrentSpeed { get; private set; }
 

@@ -9,11 +9,12 @@ public class EnemySpawner : OnBehaviour, IService
     [SerializeField] private Vector3 spawnOffset = new Vector3(0, 0.5f, 0);
 
     private HandlerFlyingCars _flyingCarsHandler;
+
     private string _lastSpawnedTruckType;
+    private bool _previousSegmentWasEmpty;
 
     private GameObject _pendingPrefab;
     private string _pendingTruckType;
-    private bool _skipSpawnThisSegment;
 
     private HandlerFlyingCars FlyingCars
     {
@@ -28,42 +29,47 @@ public class EnemySpawner : OnBehaviour, IService
 
     public void SpawnEnemyOnSegment(Transform segment)
     {
-        if (_skipSpawnThisSegment)
-        {
-            _skipSpawnThisSegment = false;
-            return; // этот сегмент пустой
-        }
-
-        GameObject prefab;
-        string currentTruckType;
+        if (enemyPrefabs == null || enemyPrefabs.Count == 0)
+            return;
 
         if (_pendingPrefab != null)
         {
-            prefab = _pendingPrefab;
-            currentTruckType = _pendingTruckType;
-
+            SpawnPrefab(segment, _pendingPrefab, _pendingTruckType);
             _pendingPrefab = null;
             _pendingTruckType = null;
+            _previousSegmentWasEmpty = false;
+            return;
         }
-        else
+
+        // Если прошлый сегмент был пустой, этот сегмент обязан быть не пустым
+        if (!_previousSegmentWasEmpty && Random.value > spawnChance)
         {
-            if (Random.value > spawnChance) return;
-            if (enemyPrefabs == null || enemyPrefabs.Count == 0) return;
-
-            prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
-            currentTruckType = GetTruckType(prefab);
-
-            if (!string.IsNullOrEmpty(_lastSpawnedTruckType) &&
-                !string.IsNullOrEmpty(currentTruckType) &&
-                _lastSpawnedTruckType != currentTruckType)
-            {
-                _pendingPrefab = prefab;
-                _pendingTruckType = currentTruckType;
-                _skipSpawnThisSegment = true;
-                return; // этот сегмент оставляем пустым между разными траками
-            }
+            _previousSegmentWasEmpty = true;
+            return;
         }
 
+        GameObject prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
+        string currentTruckType = GetTruckType(prefab);
+
+        // Если предыдущий сегмент был НЕ пустой и тип трака сменился,
+        // то текущий сегмент оставляем пустым, а этот prefab спавним на следующем
+        if (!_previousSegmentWasEmpty &&
+            !string.IsNullOrEmpty(_lastSpawnedTruckType) &&
+            !string.IsNullOrEmpty(currentTruckType) &&
+            _lastSpawnedTruckType != currentTruckType)
+        {
+            _pendingPrefab = prefab;
+            _pendingTruckType = currentTruckType;
+            _previousSegmentWasEmpty = true;
+            return;
+        }
+
+        SpawnPrefab(segment, prefab, currentTruckType);
+        _previousSegmentWasEmpty = false;
+    }
+
+    private void SpawnPrefab(Transform segment, GameObject prefab, string truckType)
+    {
         GameObject spawnedGroup = Instantiate(prefab, segment);
         spawnedGroup.transform.localPosition = spawnOffset;
 
@@ -74,7 +80,7 @@ public class EnemySpawner : OnBehaviour, IService
                 FlyingCars.RegisterCar(car.gameObject);
         }
 
-        _lastSpawnedTruckType = currentTruckType;
+        _lastSpawnedTruckType = truckType;
     }
 
     private string GetTruckType(GameObject prefab)

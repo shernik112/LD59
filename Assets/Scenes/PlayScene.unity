@@ -432,7 +432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialSpeed: 60
   maxSpeed: 145
-  acceleration: 1.5
+  acceleration: 0.75
 --- !u!4 &431759082
 Transform:
   m_ObjectHideFlags: 0
@@ -1215,8 +1215,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 7fb63dedefb6c9a48b70efec23b5b2e1, type: 2}
   maxSteerAngle: 35
-  steerSpeed: 500
-  returnToCenterSpeed: 90
+  steerSpeed: 550
+  returnToCenterSpeed: 150
+  speedRampUp: 0.5
+  baseSpeedIncrease: 0.02
+  maxSpeedMultiplier: 2.5
+  directionSnapFactor: 0.6
 --- !u!65 &1321183282
 BoxCollider:
   m_ObjectHideFlags: 0
