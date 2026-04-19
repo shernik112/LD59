@@ -1,7 +1,5 @@
 using UnityEngine;
 
-using UnityEngine;
-
 public class TreePrefab : OnBehaviour
 {
     [SerializeField] private Sprite shadowSprite;
