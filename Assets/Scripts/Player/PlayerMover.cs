@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMover : OnBehaviour, IService
 {
+    public event Action OnDestroyCar;
     [SerializeField] private PlayerData playerData;
     [SerializeField] private float maxSteerAngle = 35f;
     [SerializeField] private float steerSpeed = 240f;
@@ -31,6 +33,7 @@ public class PlayerMover : OnBehaviour, IService
 
     protected override void OnFixedUpdate()
     {
+        _rb.position = new Vector3(_rb.position.x, 0.5f, 0f);
         HandleRotation();
         HandleMovement();
         ClampPosition();
@@ -76,5 +79,11 @@ public class PlayerMover : OnBehaviour, IService
         pos.x = Mathf.Clamp(pos.x, -3f, 3f);
 
         _rb.MovePosition(pos);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.TryGetComponent<FlyingCar>(out _))
+            OnDestroyCar?.Invoke();
     }
 }
